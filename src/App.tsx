@@ -1,39 +1,48 @@
-import { useState } from "react";
-import Layout from "./components/Layout";
+import { useState } from 'react'
+import './App.css'
+import Layout from './components/Layout'
+const baseClasses =
+  "h-16 w-full flex items-center justify-center text-xl font-semibold rounded-lg cursor-pointer transition duration-150 ease-in-out";
+
+const equalsClasses = 
+            "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800";
+
+const defaultClasses = 
+            "bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 active:bg-gray-100";            
 
 function App() {
 
   const signList = [
-    '%','CE','C','Del',
-    '1/x','x²','√x','/', // 【優化】將 'x2' 和 'x' 改為更標準的 'x²' 和 '√x'
-    '7','8','9','X',
-    '4','5','6','+',
-    '1','2','3','-',
-    '+/-', '0', '.', '=', // 【優化】添加了最後一排按鈕
+    '%', 'CE', 'C', '⌫', // ⌫ 代表退格/刪除鍵 (Backspace)
+    '1/x', 'x²', '²√x', '÷',
+    '7', '8', '9', '×',
+    '4', '5', '6', '−', // 這裡使用數學上的減號 U+2212 '−'
+    '1', '2', '3', '+',
+    '±', '0', '.', '=',
   ];
 
-  const [count, setCount] = useState(8); 
-  // 狀態 count 雖然已修復，但目前在 JSX 中仍未使用，它通常會用來顯示計算結果或輸入。
-  
+  const [count, setCount] = useState(0)
+
   return (
     <Layout>
-      {/* 3. 【修復】 修正錯誤的 Tailwind 類名，並確保 div 標籤閉合 */}
+
       <div className="grid grid-cols-4 gap-2 bg-gray-100 p-4 rounded-xl shadow-2xl max-w-sm mx-auto">
-        {signList.map((sign, index) =>(
-          <div 
-            key={index} 
-            className={
-               // 讓 '=' 號按鈕樣式可以特別處理，例如跨兩欄
-               sign === '=' ? `${baseClasses} col-span-1 bg-blue-500 text-white hover:bg-blue-600` : baseClasses
+        {
+          signList.map(
+            (sign, index) => {
+
+              return (
+                <div key={index} className={baseClasses}>
+                  {sign}
+                </div>
+              )
             }
-            onClick={() => console.log(`按下了: ${sign}`)} // 添加一個點擊事件
-          >
-            {sign}
-          </div>
-        ))}
-      </div> 
+          )
+        }
+
+      </div>
     </Layout>
-  ); // 4. 【修復】確保 return 語句完整
+  )
 }
 
-export default App;
+export default App
