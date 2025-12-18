@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome against localhost",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173", // 確保這個 port 與 'npm run dev' 的 port 一致
+      "webRoot": "${workspaceFolder}"
+    }
+    // 如果您使用 Edge，可以新增這個 (或只用這個)
+    // {
+    //   "name": "Launch Edge against localhost",
+    //   "type": "msedge",
+    //   "request": "launch",
+    //   "url": "http://localhost:5173",
+    //   "webRoot": "${workspaceFolder}"
+    // }
+  ]
+}
