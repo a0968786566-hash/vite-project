@@ -1,16 +1,26 @@
-import { useState } from 'react'
+// import { useState } from 'react'
+import { useState } from 'react';
 import './App.css'
 import Layout from './components/Layout'
+
 const baseClasses =
   "h-16 w-full flex items-center justify-center text-xl font-semibold rounded-lg cursor-pointer transition duration-150 ease-in-out";
 
-const equalsClasses = 
-            "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800";
+// const equalsClasses = 
+//             "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800";
 
-const defaultClasses = 
-            "bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 active:bg-gray-100";            
+// const defaultClasses = 
+//             "bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 active:bg-gray-100";            
+
+
+
 
 function App() {
+    const [input1, setInput1] = useState("");
+    const [op, setOp] = useState("");
+    const [eq, setEq] = useState(false);
+    const [input2, setInput2] = useState("");
+    const [ans, setAns] = useState(0);
 
   const signList = [
     '%', 'CE', 'C', '⌫', // ⌫ 代表退格/刪除鍵 (Backspace)
@@ -21,20 +31,61 @@ function App() {
     '±', '0', '.', '=',
   ];
 
-  const [count, setCount] = useState(0)
+  const isNum = (sign: string) => {
+    return !isNaN(parseFloat(sign))
+  };
+
+  const handleCalc = (sign:string) => {
+   
+   if (isNum(sign)) {
+      if (op) {
+        setInput2(input2 + sign);
+      }else{
+       setInput1(input1 + sign);
+      }
+   }
+
+   if("+" === sign){
+    alert("press +");
+    setOp(sign)
+
+    return;
+   }
+   if ("=" === sign) {
+    if("+" === op){
+      setAns(parseFloat(input1) + parseFloat(input2) );
+      setEq(true);
+    }
+   }
+
+  };
+
+const getDisplayText=()=>{
+  if(eq){
+    return ans+"";
+  }
+  
+  if(op){
+    return input2;
+  }
+  return input1;
+};
+
+  // const [count, setCount] = useState(0)
 
   return (
     <Layout>
 
+      <input type='text' value={getDisplayText()} className="bg-green-100 p-4 mb-4 rounded-lg shadow-inner" />
       <div className="grid grid-cols-4 gap-2 bg-gray-100 p-4 rounded-xl shadow-2xl max-w-sm mx-auto">
         {
           signList.map(
             (sign, index) => {
 
               return (
-                <div key={index} className={baseClasses}>
+                <button key={index} className={baseClasses}  onClick={()=>{  handleCalc(sign); }}>
                   {sign}
-                </div>
+                </button>
               )
             }
           )
@@ -43,6 +94,7 @@ function App() {
       </div>
     </Layout>
   )
+
 }
 
-export default App
+export default App;
