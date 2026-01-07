@@ -45,6 +45,14 @@ function App() {
       setEq(false);       
       return;             
     }
+    if (sign === "⌫") {
+    if (op) {
+      setInput2(prev => prev.slice(0, -1));
+    } else {
+      setInput1(prev => prev.slice(0, -1));
+    }
+    return;
+  }
    if (isNum(sign)) {
       if (op) {
         setInput2(input2 + sign);
