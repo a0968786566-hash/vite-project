@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+label{
+  color: red;
+}

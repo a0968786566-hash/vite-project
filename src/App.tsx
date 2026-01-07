@@ -37,6 +37,14 @@ function App() {
 
   const handleCalc = (sign:string) => {
    
+    if (sign === "C") {
+      setInput1("");      
+      setInput2("");      
+      setOp("");          
+      setAns(0);          
+      setEq(false);       
+      return;             
+    }
    if (isNum(sign)) {
       if (op) {
         setInput2(input2 + sign);
@@ -48,12 +56,38 @@ function App() {
    if("+" === sign){
     alert("press +");
     setOp(sign)
-
     return;
    }
+   if ("−" === sign) { 
+      alert("press −");
+      setOp(sign);
+      return;
+    }
+    if ("×" === sign) { 
+      alert("press ×");
+      setOp(sign);
+      return;
+    }
+    if ("÷" === sign) { 
+      alert("press ÷");
+      setOp(sign);
+      return;
+    }
    if ("=" === sign) {
     if("+" === op){
       setAns(parseFloat(input1) + parseFloat(input2) );
+      setEq(true);
+      }
+    if ("−" === op) {
+       setAns(parseFloat(input1) - parseFloat(input2));
+      setEq(true);
+    }
+     if ("×" === op) {
+       setAns(parseFloat(input1) * parseFloat(input2));
+      setEq(true);
+    }
+     if ("÷" === op) {
+       setAns(parseFloat(input1) / parseFloat(input2));
       setEq(true);
     }
    }
@@ -92,6 +126,26 @@ const getDisplayText=()=>{
         }
 
       </div>
+      <table>
+          <tr>
+            <th><label>周日</label></th><th>周一</th><th>周二</th><th>周三</th><th>周四</th><th>周五</th><th><label>周六</label></th>
+          </tr>
+           <tr>
+            <th></th><th></th><th></th><th></th><th>1</th><th>2</th><th><label>3</label></th>
+          </tr>
+          <tr>
+            <th><label>4</label></th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th><label>10</label></th>
+          </tr>
+          <tr>
+            <th><label>11</label></th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th><label>17</label></th>
+          </tr>
+          <tr>
+            <th><label>18</label></th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th><label>24</label></th>
+          </tr>
+          <tr>
+            <th><label>25</label></th><th>26</th><th>27</th><th>28</th><th>29</th><th>30</th><th><label>31</label></th>
+          </tr>
+        </table>
     </Layout>
   )
 
